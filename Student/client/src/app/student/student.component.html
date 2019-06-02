@@ -1,0 +1,91 @@
+<div class="container">  
+  <mat-card>  
+    <mat-toolbar color="accent">  
+      <div align="center" style="color:white;text-align: right;">  
+        Student CRUD operation in Angular 7 using Web api and In Memory Database  
+      </div>    
+    
+    <table>
+        <tr>                    
+            <td class="tbl1">
+              <mat-form-field class="demo-full-width">  
+                <input [(ngModel)]="searchText" type="text"  matInput placeholder="Search Student" >  
+              </mat-form-field>  
+            </td>
+          </tr>
+        </table>
+      </mat-toolbar>  
+  <br><br>  
+    <mat-card-content>  
+     
+      <form [formGroup]="studentForm">  
+              <table>  
+                <tr>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="name" matTooltip="Enter Student Name" matInput placeholder="Student Name">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!studentForm.get('name').value && studentForm.get('name').touched"></span>  
+                    </mat-error>  
+                  </td> 
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="grade" matTooltip="Enter Student Grade" matInput placeholder="Grade">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!studentForm.get('grade').value && studentForm.get('grade').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="school" matTooltip="Enter Student School" matInput placeholder="School">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!studentForm.get('school').value && studentForm.get('school').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                </tr>  
+                <tr>  
+                  <td></td>  
+                  <td  class="content-center">  
+                    <button type="button" mat-raised-button color="accent"matTooltip="Click Submit Button" (click)="onFormSubmit()" [disabled]="!studentForm.valid">Submit</button>      
+                    &nbsp;&nbsp;
+                    <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+                  </td>  
+                  <td></td>
+                </tr> 
+                <tr>
+                  <td colspan="3"   class="content-center">    
+                    <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success">  
+                      {{message}}  
+                    </p>  
+                  </td> 
+                </tr> 
+                
+              </table>                 
+            </form>  
+  <br><br>  
+        <table class="table" >  
+            <tr ngclass="btn-primary">  
+              <th class="tbl2">Student Name</th>  
+              <th class="tbl2">Grade</th>  
+              <th class="tbl2">School</th>  
+              <th class="tbl2">Edit</th>  
+              <th class="tbl2">Delete</th>  
+            </tr>  
+            <tr *ngFor="let student of allStudents | filterStudent:searchText">  
+              <td class="tbl2">{{student.name}}</td>  
+              <td class="tbl2">{{student.grade }}</td>  
+              <td class="tbl2">{{student.school}}</td>  
+              <td class="tbl2">  
+                <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadStudentToEdit(student.id)">Edit</button>  
+              </td>  
+              <td class="tbl2">  
+              <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteStudent(student.id)">Delete</button>  
+              </td>  
+            </tr>  
+          </table>  
+    </mat-card-content>  
+  </mat-card>  
+  </div>
